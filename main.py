@@ -7,6 +7,8 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from nyu_dataset import *
 from unet_model import *
+from loss import depth_loss
+from utils import *
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -21,7 +23,6 @@ def train_fn(loader, model, optimizer, loss_fn, scaler):
         # forward
         with torch.cuda.amp.autocast():
             predictions = model(data)
-            print(data.shape, targets.shape, predictions.shape)
             loss = depth_loss(predictions, targets)
         # backward
         print(f"Loss for batch-{batch_idx} is {loss}")
