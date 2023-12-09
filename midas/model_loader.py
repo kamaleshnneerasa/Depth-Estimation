@@ -214,7 +214,7 @@ def load_model(device, model_path, model_type="dpt_large_384", optimize=True, he
             Resize(
                 net_w,
                 net_h,
-                resize_target=None,
+                resize_target=True,
                 keep_aspect_ratio=keep_aspect_ratio,
                 ensure_multiple_of=32,
                 resize_method=resize_mode,
